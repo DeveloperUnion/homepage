@@ -4,7 +4,6 @@ export default function CompanyInfo() {
     { label: 'ブランド名', value: '建設テックパートナーズ' },
     { label: '代表者', value: '代表取締役　北島壮馬' },
     { label: '設立', value: '2025年6月' },
-    { label: '資本金', value: '10,000円' },
     {
       label: '所在地',
       value: '〒814-0001<br />福岡県福岡市早良区百道2-15-1'

@@ -1,6 +1,6 @@
 export default function StatsSection() {
   const stats = [
-    { number: '7', label: '導入企業数' },
+    { number: '7社', label: '導入企業数' },
     { number: '20h', label: '業務効率化時間（月・一人当たり）' },
     { number: '24h', label: 'サポート時間' },
   ];
