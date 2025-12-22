@@ -1,15 +1,15 @@
 'use client';
 
 export default function ClientsSection() {
-  const clients = [
-    { name: '株式会社カミノ', logo: '/images/clients/kamino.jpg' },
-    { name: '株式会社天翔', logo: '/images/clients/tensho.jpg' },
-    { name: '株式会社成木', logo: '/images/clients/naruki.jpg' },
-    { name: '株式会社櫻建', logo: '/images/clients/ogp.jpg' },
-  ];
+  // const clients = [
+  //   { name: '株式会社カミノ', logo: '/images/clients/kamino.jpg' },
+  //   { name: '株式会社天翔', logo: '/images/clients/tensho.jpg' },
+  //   { name: '株式会社成木', logo: '/images/clients/naruki.jpg' },
+  //   { name: '株式会社櫻建', logo: '/images/clients/ogp.jpg' },
+  // ];
 
   // 無限スクロールのため配列を2倍に
-  const doubledClients = [...clients, ...clients];
+  // const doubledClients = [...clients, ...clients];
 
   return (
     <section className="clients-section">

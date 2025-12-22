@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -39,7 +40,7 @@ export default function Header() {
     <header className="tech-header">
       <nav className="tech-nav">
         <Link href="/" className="tech-logo">
-          <img src="/images/logo.jpg" alt="建設テックパートナーズ" className="logo-image" />
+          <Image src="/images/logo.jpg" alt="建設テックパートナーズ" className="logo-image" width={40} height={40} />
           <span>建設テックパートナーズ</span>
         </Link>
 
