@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 export default function Header() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const isActive = (path: string) => {
     if (path === '/') {
@@ -25,6 +26,15 @@ export default function Header() {
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -37,7 +47,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="tech-header">
+    <header className={`tech-header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="tech-nav">
         <Link href="/" className="tech-logo">
           <Image src="/images/logo.jpg" alt="建設テックパートナーズ" className="logo-image" width={40} height={40} />

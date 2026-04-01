@@ -1,4 +1,11 @@
+'use client';
+
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+
 export default function FeaturesSection() {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
+
   const features = [
     {
       number: '01',
@@ -19,13 +26,16 @@ export default function FeaturesSection() {
 
   return (
     <section className="section">
-      <div className="section-header">
-        <p className="section-label">Why Choose Us</p>
-        <h2 className="section-title">選ばれる理由</h2>
+      <div className="section-header" ref={headerRef}>
+        <p className={`section-label reveal stagger-1 ${headerVisible ? 'visible' : ''}`}>Why Choose Us</p>
+        <h2 className={`section-title reveal stagger-2 ${headerVisible ? 'visible' : ''}`}>選ばれる理由</h2>
       </div>
-      <div className="features-grid">
+      <div className="features-grid" ref={gridRef}>
         {features.map((feature, index) => (
-          <div key={index} className="feature-item">
+          <div
+            key={index}
+            className={`feature-item reveal stagger-${index + 1} ${gridVisible ? 'visible' : ''}`}
+          >
             <span className="feature-number">{feature.number}</span>
             <div>
               <h3>{feature.title}</h3>

@@ -26,8 +26,11 @@ export default function Home() {
       <Header />
       <main>
         <HeroSection />
+        <div className="section-divider" />
         <ServicesSection />
+        <div className="section-divider" />
         <FeaturesSection />
+        <div className="section-divider" />
         <StatsSection />
         <ClientsSection />
         <CTASection />
