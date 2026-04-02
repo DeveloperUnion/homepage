@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -50,8 +49,7 @@ export default function Header() {
     <header className={`tech-header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="tech-nav">
         <Link href="/" className="tech-logo">
-          <Image src="/images/logo.jpg" alt="建設テックパートナーズ" className="logo-image" width={40} height={40} />
-          <span>建設テックパートナーズ</span>
+          <span className="tech-logo-text">union</span>
         </Link>
 
         <button
@@ -59,16 +57,23 @@ export default function Header() {
           onClick={toggleMenu}
           aria-label="メニューを開く"
         >
-          <i className={isMenuOpen ? "fas fa-times" : "fas fa-bars"}></i>
+          <span className={`hamburger ${isMenuOpen ? 'hamburger--open' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </button>
 
         <ul className={`tech-nav-links ${isMenuOpen ? 'mobile-menu-open' : ''}`}>
           <li><Link href="/" onClick={closeMenu} className={isActive('/') ? 'active' : ''}>ホーム</Link></li>
-          <li><Link href="/services/dx-consulting" onClick={closeMenu} className={isActive('/services/dx-consulting') ? 'active' : ''}>DXコンサル</Link></li>
-          <li><Link href="/services/product-development" onClick={closeMenu} className={isActive('/services/product-development') ? 'active' : ''}>プロダクト開発</Link></li>
           <li><Link href="/company" onClick={closeMenu} className={isActive('/company') ? 'active' : ''}>会社概要</Link></li>
+          <li><Link href="/cases" onClick={closeMenu} className={isActive('/cases') ? 'active' : ''}>導入事例</Link></li>
           <li><Link href="/blog" onClick={closeMenu} className={isActive('/blog') ? 'active' : ''}>ブログ</Link></li>
-          <li><Link href="/contact" onClick={closeMenu} className={isActive('/contact') ? 'active' : ''}>お問い合わせ</Link></li>
+          <li>
+            <Link href="/contact" onClick={closeMenu} className={`nav-cta ${isActive('/contact') ? 'active' : ''}`}>
+              お問い合わせ
+            </Link>
+          </li>
         </ul>
       </nav>
 

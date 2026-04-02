@@ -9,17 +9,17 @@ export default function Company() {
   return (
     <>
       <Head>
-        <title>会社概要 | 建設テックパートナーズ</title>
+        <title>会社概要 | union</title>
         <meta
           name="description"
-          content="株式会社main characterの会社概要。建設業界のDX化をリードする企業情報をご紹介します。"
+          content="unionを運営する株式会社main characterの会社概要。現場で働くプロフェッショナルのためのSaaSプロダクトを提供しています。"
         />
       </Head>
 
       <Header />
       <PageHero
         title="会社概要"
-        subtitle="建設業界のDX化をリードする<br />株式会社main characterについて"
+        subtitle="unionを運営する<br />株式会社main characterについて"
       />
 
       <CompanyInfo />

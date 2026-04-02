@@ -9,19 +9,17 @@ export default function MissionVision() {
       <div className="mission-vision-container">
         <div className="mission-vision-item">
           <h3>Mission</h3>
-          <p className="mission-vision-title">建設業界に、テクノロジーで新しい価値を</p>
+          <p className="mission-vision-title">シンプルなものを、現場の当たり前に</p>
           <p className="mission-vision-text">
-            建設業界のデジタル変革を推進し、現場の生産性向上と働き方改革を実現します。
-            最新のテクノロジーを活用して、伝統ある建設業界に新しい価値を創造します。
+            シンプルな機能、シンプルなデザイン。ITに詳しくなくても迷わず使える。そんな「当たり前に使えるツール」を現場に届けることが、私たちの使命です。
           </p>
         </div>
 
         <div className="mission-vision-item">
           <h3>Vision</h3>
-          <p className="mission-vision-title">持続可能で成長力のある建設業界へ</p>
+          <p className="mission-vision-title">雑務を減らす。誇りを増やす。</p>
           <p className="mission-vision-text">
-            建設業界が抱える人材不足や業務非効率化の課題を、テクノロジーの力で解決し、
-            持続可能で成長力のある業界へと変革することを目指します。
+            建設・福祉をはじめ、現場で汗を流す人たちにこそ、テクノロジーの恩恵を届けたい。小さなアプリから始めて、気づけば業務が変わっている。そんな現場発のDXを、本気で広めていきます。
           </p>
         </div>
       </div>

@@ -8,38 +8,29 @@ export default function HeroSection() {
   const { ref, isVisible } = useScrollReveal(0.1);
 
   return (
-    <section className="hero-section" ref={ref}>
-      {/* 装飾要素 */}
-      <div className="hero-decoration-left" />
-      <div className="hero-decoration-dot" />
-      <div className="hero-decoration-dot" />
-      <div className="hero-decoration-dot" />
-      <div className="hero-decoration-right" />
+    <section className="hero-section hero-section--chalkboard" ref={ref}>
+      {/* ��板アニメーション（背景レイヤー） */}
+      <div className="hero-chalkboard-bg">
+        <HeroIllustration />
+      </div>
 
-      <div className="hero-container hero-split">
-        <div className="hero-text">
-          <p className={`hero-lead reveal stagger-1 ${isVisible ? 'visible' : ''}`}>
-            建設業界特化のDXパートナー
-          </p>
-          <h1 className={`hero-title reveal stagger-2 ${isVisible ? 'visible' : ''}`}>
-            建設業界の課題を<br />
-            テクノロジーの力で、<br />
-            共に解決していく
+      {/* テキスト（前面レイヤー） */}
+      <div className="hero-container hero-container--overlay">
+        <div className="hero-text hero-text--center">
+          <h1 className={`hero-title hero-title--chalk reveal stagger-1 ${isVisible ? 'visible' : ''}`}>
+            現場のあなたと、<br />
+            共につくる。
           </h1>
-          <p className={`hero-description reveal stagger-3 ${isVisible ? 'visible' : ''}`}>
-            私たちは建設業に特化したDXアプリの開発運用と<br className="pc-only" />
-            DX支援を通じて、建設現場の生産性向上を<br className="pc-only" />
-            サポートします。
+          <p className={`hero-description hero-description--chalk reveal stagger-2 ${isVisible ? 'visible' : ''}`}>
+            職人の隣で考え、職人と一緒につくる。<br className="pc-only" />
+            シンプルなアプリから始まる、現場発のデジタル変革。
           </p>
-          <div className={`hero-cta reveal stagger-4 ${isVisible ? 'visible' : ''}`}>
+          <div className={`hero-cta reveal stagger-3 ${isVisible ? 'visible' : ''}`}>
             <Link href="/contact" className="btn-primary">
-              無料相談はこちら
+              まずは話を聞いてみる
               <span className="btn-arrow">→</span>
             </Link>
           </div>
-        </div>
-        <div className={`hero-visual reveal-right stagger-3 ${isVisible ? 'visible' : ''}`}>
-          <HeroIllustration />
         </div>
       </div>
 

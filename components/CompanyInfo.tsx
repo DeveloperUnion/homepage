@@ -1,7 +1,7 @@
 export default function CompanyInfo() {
   const companyData = [
     { label: '会社名', value: '株式会社main character' },
-    { label: 'ブランド名', value: '建設テックパートナーズ' },
+    { label: 'ブランド名', value: 'union' },
     { label: '代表者', value: '代表取締役　北島壮馬' },
     { label: '設立', value: '2025年6月' },
     {
@@ -11,10 +11,8 @@ export default function CompanyInfo() {
   ];
 
   const businessItems = [
-    '建設現場の生産性向上支援',
-    '建設業特化DX支援事業',
-    'カスタムアプリケーション開発',
-    '業務効率化ツール導入支援'
+    '現場特化SaaSプロダクトの企画・開発・運営',
+    '建設・福祉など現場業務のデジタル化支援'
   ];
 
   return (

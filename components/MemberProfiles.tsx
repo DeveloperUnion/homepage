@@ -1,19 +1,21 @@
+'use client';
+
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+
 interface Member {
   name: string;
   position: string;
-  icon: string;
-  gradient: string;
   education: string[];
   vision: string;
 }
 
 export default function MemberProfiles() {
+  const { ref, isVisible } = useScrollReveal();
+
   const members: Member[] = [
     {
       name: '北島 壮馬',
       position: '代表取締役',
-      icon: 'fas fa-user',
-      gradient: 'var(--gradient-primary)',
       education: [
         'APU（立命館アジア太平洋大学）在学中',
         'エクサウィザーズ（AIスタートアップ）',
@@ -24,8 +26,6 @@ export default function MemberProfiles() {
     {
       name: '下平 陵生',
       position: 'エンジニア',
-      icon: 'fas fa-code',
-      gradient: 'var(--gradient-accent)',
       education: [
         '京都大学 建築学科 在学中',
         '株式会社Base connect エンジニア',
@@ -36,49 +36,37 @@ export default function MemberProfiles() {
   ];
 
   return (
-    <section className="section">
-      <div className="card-grid">
+    <section className="members-section" ref={ref}>
+      <div className="members-inner">
         {members.map((member, index) => (
-          <div key={index} className="tech-card">
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <div
-                style={{
-                  width: '120px',
-                  height: '120px',
-                  borderRadius: '50%',
-                  background: member.gradient,
-                  margin: '0 auto 1rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontSize: '3rem',
-                }}
-              >
-                <i className={member.icon}></i>
+          <div
+            key={index}
+            className={`member-card reveal stagger-${index + 1} ${isVisible ? 'visible' : ''}`}
+          >
+            <div className="member-card-header">
+              <div className="member-avatar">
+                {member.name.charAt(0)}
               </div>
-              <h3 style={{ marginBottom: '0.5rem' }}>{member.name}</h3>
-              <p className="text-primary" style={{ fontWeight: 600 }}>
-                {member.position}
-              </p>
+              <div>
+                <h3 className="member-name">{member.name}</h3>
+                <span className="member-position">{member.position}</span>
+              </div>
             </div>
 
-            <div style={{ marginBottom: '1.5rem' }}>
-              <h4 style={{ marginBottom: '0.5rem', color: 'var(--primary-color)' }}>
-                学歴・経歴
-              </h4>
-              <ul style={{ listStyle: 'none', padding: 0, lineHeight: 1.8 }}>
-                {member.education.map((item, idx) => (
-                  <li key={idx}>• {item}</li>
-                ))}
-              </ul>
-            </div>
+            <div className="member-card-body">
+              <div className="member-section">
+                <h4 className="member-section-label">経歴</h4>
+                <ul className="member-career-list">
+                  {member.education.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
+              </div>
 
-            <div>
-              <h4 style={{ marginBottom: '0.5rem', color: 'var(--primary-color)' }}>
-                事業立ち上げへの想い
-              </h4>
-              <p style={{ lineHeight: 1.6 }}>{member.vision}</p>
+              <div className="member-section">
+                <h4 className="member-section-label">想い</h4>
+                <p className="member-vision">{member.vision}</p>
+              </div>
             </div>
           </div>
         ))}

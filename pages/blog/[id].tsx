@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { client, Blog } from '@/lib/microcms';
+import { getBlogById, getAllBlogIds, Blog } from '@/lib/blog';
 import styles from '@/styles/BlogDetail.module.css';
 
 type Props = {
@@ -85,55 +85,30 @@ export default function BlogDetail({ blog }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  try {
-    const data = await client.get({
-      endpoint: 'blogs',
-      queries: {
-        fields: 'id',
-        limit: 100,
-      },
-    });
+  const ids = await getAllBlogIds();
 
-    const paths = data.contents.map((content: { id: string }) => ({
-      params: { id: content.id },
-    }));
+  const paths = ids.map((id) => ({
+    params: { id },
+  }));
 
-    return {
-      paths,
-      fallback: 'blocking',
-    };
-  } catch (error) {
-    console.error('Failed to fetch blog paths:', error);
-    return {
-      paths: [],
-      fallback: 'blocking',
-    };
-  }
+  return {
+    paths,
+    fallback: false,
+  };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  try {
-    if (!params?.id || typeof params.id !== 'string') {
-      return {
-        notFound: true,
-      };
-    }
-
-    const blog = await client.get({
-      endpoint: 'blogs',
-      contentId: params.id,
-    });
-
-    return {
-      props: {
-        blog,
-      },
-      revalidate: 60,
-    };
-  } catch (error) {
-    console.error('Failed to fetch blog:', error);
-    return {
-      notFound: true,
-    };
+  if (!params?.id || typeof params.id !== 'string') {
+    return { notFound: true };
   }
+
+  const blog = await getBlogById(params.id);
+
+  if (!blog) {
+    return { notFound: true };
+  }
+
+  return {
+    props: { blog },
+  };
 };

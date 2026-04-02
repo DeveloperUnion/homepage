@@ -1,56 +1,46 @@
 'use client';
 
-import Link from 'next/link';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
-import { DXConsultingIcon, ProductDevIcon } from './ServiceIcons';
 
 export default function ServicesSection() {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
-  const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal();
 
-  const services = [
-    {
-      number: '01',
-      title: 'DXコンサルティング',
-      description: '建設業界の業務課題を分析し、最適なデジタル化戦略を立案。現状分析から導入支援まで一貫してサポートします。',
-      href: '/services/dx-consulting',
-      icon: <DXConsultingIcon />
-    },
-    {
-      number: '02',
-      title: 'プロダクト開発',
-      description: '建設業に特化したカスタムアプリケーションの開発。現場の声を反映した使いやすいシステムを構築します。',
-      href: '/services/product-development',
-      icon: <ProductDevIcon />
-    }
+  const products = [
+    { name: 'union 資材発注 for 足場', comingSoon: false },
+    { name: 'union 資材発注 for リース', comingSoon: false },
+    { name: 'union 健康管理', comingSoon: true },
+    { name: 'union 日報', comingSoon: true },
+    { name: 'union 勤怠管理', comingSoon: true },
   ];
+
+  // マーキー用に2倍にして無限ループを実現
+  const doubledProducts = [...products, ...products];
 
   return (
     <section className="section">
       <div className="section-header" ref={headerRef}>
-        <p className={`section-label reveal stagger-1 ${headerVisible ? 'visible' : ''}`}>Services</p>
-        <h2 className={`section-title reveal stagger-2 ${headerVisible ? 'visible' : ''}`}>サービス</h2>
+        <p className={`section-label reveal stagger-1 ${headerVisible ? 'visible' : ''}`}>Products</p>
+        <h2 className={`section-title reveal stagger-2 ${headerVisible ? 'visible' : ''}`}>プロダクト</h2>
       </div>
-      <div className="services-grid services-grid-2" ref={cardsRef}>
-        {services.map((service, index) => (
-          <Link
-            key={index}
-            href={service.href}
-            className={`service-card-simple reveal stagger-${index + 1} ${cardsVisible ? 'visible' : ''}`}
-          >
-            <div className="service-card-icon-area">
-              {service.icon}
-              <div className="service-card-number">{service.number}</div>
-            </div>
-            <div className="service-card-body">
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <span className="service-link">
-                詳しく見る <span className="arrow">→</span>
-              </span>
-            </div>
-          </Link>
-        ))}
+      <div className="products-overview" ref={contentRef}>
+        <div className={`products-description reveal stagger-1 ${contentVisible ? 'visible' : ''}`}>
+          <h3>unionプロダクトシリーズ</h3>
+          <p>
+            現場の課題に特化したSaaSプロダクトをラインナップで提供。<br className="pc-only" />
+            現場の声から生まれたツールで、日々の業務をシンプルにします。
+          </p>
+        </div>
+        <div className={`product-marquee reveal stagger-2 ${contentVisible ? 'visible' : ''}`}>
+          <div className="product-marquee-track">
+            {doubledProducts.map((product, index) => (
+              <div key={index} className={`product-marquee-item ${product.comingSoon ? 'coming-soon' : ''}`}>
+                <span className="product-marquee-name">{product.name}</span>
+                {product.comingSoon && <span className="product-marquee-badge">Coming Soon</span>}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

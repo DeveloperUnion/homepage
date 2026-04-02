@@ -9,17 +9,17 @@ export default function Cases() {
   return (
     <>
       <Head>
-        <title>導入事例 | 建設テックパートナーズ</title>
+        <title>導入事例 | union</title>
         <meta
           name="description"
-          content="建設業界のDX化を成功に導いた実際の導入事例をご紹介します。"
+          content="unionプロダクトの導入事例をご紹介します。"
         />
       </Head>
 
       <Header />
       <PageHero
         title="導入事例"
-        subtitle="建設業界のDX化を成功に導いた<br />実際の導入事例をご紹介"
+        subtitle="unionプロダクトの<br />導入事例をご紹介"
       />
 
       <CaseStudies />

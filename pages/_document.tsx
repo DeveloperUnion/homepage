@@ -29,9 +29,9 @@ export default function Document() {
               '@context': 'https://schema.org',
               '@type': 'Organization',
               name: '株式会社main character',
-              alternateName: '建設テックパートナーズ',
+              alternateName: 'union',
               url: 'https://main-character.co.jp',
-              description: '建設業に特化したDXアプリの開発運用とDX支援を行う企業',
+              description: '建設・福祉など現場で働くプロフェッショナルのためのSaaSプロダクトシリーズを提供する企業',
               address: {
                 '@type': 'PostalAddress',
                 streetAddress: '早良区百道2-15-1',
@@ -52,7 +52,7 @@ export default function Document() {
                 '@type': 'Person',
                 name: '北島壮馬',
               },
-              industry: '建設業DX支援',
+              industry: '現場特化SaaSプロダクト',
               numberOfEmployees: '2-10',
             }),
           }}

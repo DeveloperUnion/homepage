@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import PageHero from '@/components/PageHero';
 import Footer from '@/components/Footer';
-import { client, Blog } from '@/lib/microcms';
+import { getAllBlogs, Blog } from '@/lib/blog';
 import styles from '@/styles/Blog.module.css';
 
 type Props = {
@@ -40,21 +40,21 @@ export default function BlogList({ blogs }: Props) {
   return (
     <>
       <Head>
-        <title>ブログ | 建設テックパートナーズ - 株式会社main character</title>
+        <title>ブログ | union - 株式会社main character</title>
         <meta
           name="description"
-          content="建設業界のDX化、生産性向上に関する情報を発信しています。最新のテクノロジー動向や事例をご紹介します。"
+          content="現場の業務改善やプロダクトに関する情報を発信しています。"
         />
         <meta
           name="keywords"
-          content="建設業,DX,ブログ,テクノロジー,生産性向上,業務効率化"
+          content="union,SaaS,現場,建設業,福祉,業務改善,プロダクト"
         />
       </Head>
 
       <Header />
       <PageHero
         title="ブログ"
-        subtitle="建設業界のDX化や生産性向上に関する情報を発信しています"
+        subtitle="現場の業務改善やプロダクトに関する情報を発信しています"
       />
 
       <main className={styles.blogMain}>
@@ -138,19 +138,12 @@ export default function BlogList({ blogs }: Props) {
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const data = await client.get({
-      endpoint: 'blogs',
-      queries: {
-        orders: '-publishedAt',
-        limit: 100,
-      },
-    });
+    const blogs = await getAllBlogs();
 
     return {
       props: {
-        blogs: data.contents,
+        blogs,
       },
-      revalidate: 60, // ISR: 60秒ごとに再生成
     };
   } catch (error) {
     console.error('Failed to fetch blogs:', error);
@@ -158,7 +151,6 @@ export const getStaticProps: GetStaticProps = async () => {
       props: {
         blogs: [],
       },
-      revalidate: 60,
     };
   }
 };

@@ -9,17 +9,17 @@ export default function Members() {
   return (
     <>
       <Head>
-        <title>メンバー紹介 | 建設テックパートナーズ</title>
+        <title>メンバー紹介 | union</title>
         <meta
           name="description"
-          content="建設業界のDX化をリードするプロフェッショナルチームをご紹介します。"
+          content="unionを開発・運営するチームメンバーをご紹介します。"
         />
       </Head>
 
       <Header />
       <PageHero
         title="メンバー紹介"
-        subtitle="建設業界のDX化をリードする<br />プロフェッショナルチーム"
+        subtitle="unionを開発・運営する<br />チームメンバー"
       />
 
       <MemberProfiles />

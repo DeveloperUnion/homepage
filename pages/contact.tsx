@@ -9,17 +9,17 @@ export default function Contact() {
   return (
     <>
       <Head>
-        <title>お問い合わせ | 建設テックパートナーズ</title>
+        <title>お問い合わせ | union</title>
         <meta
           name="description"
-          content="建設業界のDX化についてお気軽にご相談ください。無料相談実施中。"
+          content="unionプロダクトの導入やご質問など、お気軽にお問い合わせください。"
         />
       </Head>
 
       <Header />
       <PageHero
         title="お問い合わせ"
-        subtitle="建設業界のDX化について<br />お気軽にご相談ください"
+        subtitle="unionプロダクトの導入やご質問など<br />お気軽にお問い合わせください"
       />
 
       <ContactForm />

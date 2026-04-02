@@ -52,6 +52,7 @@
 
 .eyecatch {
   width: 200px;
+  height: 140px;
   flex-shrink: 0;
   overflow: hidden;
   background: var(--gray-100);
