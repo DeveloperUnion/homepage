@@ -9,7 +9,7 @@ export default function ServicesSection() {
   const products = [
     { name: 'union 資材発注 for 足場', comingSoon: false },
     { name: 'union 資材発注 for リース', comingSoon: false },
-    { name: 'union 健康管理', comingSoon: true },
+    { name: 'union 介護記録', comingSoon: true },
     { name: 'union 日報', comingSoon: true },
     { name: 'union 勤怠管理', comingSoon: true },
   ];

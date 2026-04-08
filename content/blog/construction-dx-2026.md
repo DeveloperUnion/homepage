@@ -1,6 +1,6 @@
 ---
 title: "建設業DXの最前線：2026年に押さえるべき3つのトレンド"
-category: "建設DX"
+category: "業界トレンド"
 publishedAt: "2026-04-01T09:00:00+09:00"
 eyecatch: "/images/blog/construction-tablet.jpg"
 ---

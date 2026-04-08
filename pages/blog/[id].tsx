@@ -15,7 +15,7 @@ export default function BlogDetail({ blog }: Props) {
   return (
     <>
       <Head>
-        <title>{`${blog.title} | ブログ - 建設テックパートナーズ`}</title>
+        <title>{`${blog.title} | ブログ - union`}</title>
         <meta
           name="description"
           content={(blog.html || blog.content).substring(0, 150).replace(/<[^>]*>/g, '')}
