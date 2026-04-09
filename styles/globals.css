@@ -2145,24 +2145,30 @@ body {
 }
 
 .services-list-inner {
-  max-width: 960px;
+  max-width: 1140px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 5rem;
 }
 
 .service-item {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
-  padding-bottom: 6rem;
+  padding-bottom: 5rem;
   border-bottom: 1px solid var(--gray-200);
 }
 
 .service-item:last-child {
   border-bottom: none;
   padding-bottom: 0;
+}
+
+.service-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
 .service-item-head {
@@ -2173,10 +2179,10 @@ body {
 
 .service-item-name {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: var(--gray-900);
-  line-height: 1.4;
+  line-height: 1.35;
   letter-spacing: 0.02em;
   display: flex;
   flex-wrap: wrap;
@@ -2200,7 +2206,7 @@ body {
 }
 
 .service-item-tagline {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   color: var(--gray-500);
   font-weight: 500;
   margin: 0;
@@ -2209,7 +2215,7 @@ body {
 .service-item-body {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1.5rem;
 }
 
 .service-item-description {
@@ -2252,15 +2258,64 @@ body {
   font-weight: 700;
 }
 
-@media (min-width: 768px) {
-  .service-item {
-    grid-template-columns: 1fr 1.4fr;
-    gap: 4rem;
-  }
+/* ===== サービス一覧 - メディア（画像） ===== */
+.service-item-media {
+  width: 100%;
+}
 
+.service-item-media--wide {
+  display: block;
+}
+
+.service-item-media-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--gray-100);
+  box-shadow: 0 18px 48px -24px rgba(15, 30, 60, 0.25);
+}
+
+.service-item-media-frame--wide {
+  aspect-ratio: 4 / 3;
+  width: 100%;
+}
+
+.service-item-media--square-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.service-item-media-frame--square-grid {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
   .service-item-features {
     grid-template-columns: 1fr 1fr;
     gap: 0.75rem 1.5rem;
+  }
+
+  /* 画像があるサービスは 左テキスト / 右画像 の2カラム */
+  .service-item--with-media {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .service-item--with-media .service-item-content {
+    gap: 1.5rem;
+  }
+
+  .service-item--with-media .service-item-name {
+    font-size: 1.875rem;
+  }
+
+  .service-item--with-media .service-item-features {
+    grid-template-columns: 1fr;
+    gap: 0.625rem;
   }
 }
 
@@ -2275,6 +2330,7 @@ body {
 
   .service-item {
     padding-bottom: 4rem;
+    gap: 2.25rem;
   }
 
   .service-item-name {
