@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="footer-v2-inner">
         <div className="footer-v2-top">
           <div className="footer-v2-brand">
-            <span className="footer-v2-logo">union</span>
+            <Image src="/images/logo.png" alt="union" width={136} height={44} className="footer-v2-logo-img" />
             <p className="footer-v2-company">
               株式会社main character
             </p>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export default function ServicesSection() {
@@ -8,11 +9,11 @@ export default function ServicesSection() {
   const { ref: contentRef, isVisible: contentVisible } = useScrollReveal();
 
   const products = [
-    { slug: 'scaffold', name: 'union 資材発注 for 足場', comingSoon: false },
-    { slug: 'lease', name: 'union 資材発注 for リース', comingSoon: false },
-    { slug: 'care', name: 'union 介護記録', comingSoon: true },
-    { slug: 'daily-report', name: 'union 日報', comingSoon: true },
-    { slug: 'attendance', name: 'union 勤怠管理', comingSoon: true },
+    { slug: 'scaffold', nameLine1: 'union 資材発注', nameLine2: 'for 足場', comingSoon: false, icon: '/images/icon-shizai.png' },
+    { slug: 'lease', nameLine1: 'union 資材発注', nameLine2: 'for リース', comingSoon: false, icon: '/images/icon-shizai.png' },
+    { slug: 'care', nameLine1: 'union 介護記録', comingSoon: true },
+    { slug: 'daily-report', nameLine1: 'union 日報', comingSoon: true },
+    { slug: 'attendance', nameLine1: 'union 勤怠管理', comingSoon: true },
   ];
 
   // マーキー用に2倍にして無限ループを実現
@@ -45,7 +46,14 @@ export default function ServicesSection() {
                 href={`/services#service-${product.slug}`}
                 className={`product-marquee-item ${product.comingSoon ? 'coming-soon' : ''}`}
               >
-                <span className="product-marquee-name">{product.name}</span>
+                {product.icon && (
+                  <Image src={product.icon} alt="" width={36} height={36} className="product-marquee-icon" />
+                )}
+                <span className="product-marquee-name">
+                  {product.nameLine1}
+                  {product.nameLine2 && <br />}
+                  {product.nameLine2 && <span className="product-marquee-name-sub">{product.nameLine2}</span>}
+                </span>
                 {product.comingSoon && <span className="product-marquee-badge">Coming Soon</span>}
               </Link>
             ))}

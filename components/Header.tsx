@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
@@ -49,7 +50,7 @@ export default function Header() {
     <header className={`tech-header ${isScrolled ? 'scrolled' : ''}`}>
       <nav className="tech-nav">
         <Link href="/" className="tech-logo">
-          <span className="tech-logo-text">union</span>
+          <Image src="/images/logo.png" alt="union" width={160} height={52} className="tech-logo-img" priority />
         </Link>
 
         <button
