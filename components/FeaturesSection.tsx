@@ -3,6 +3,7 @@
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 export default function FeaturesSection() {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: ref1, isVisible: v1 } = useScrollReveal();
   const { ref: ref2, isVisible: v2 } = useScrollReveal();
   const { ref: ref3, isVisible: v3 } = useScrollReveal();
@@ -32,24 +33,26 @@ export default function FeaturesSection() {
   ];
 
   return (
-    <section className="features-section-v2">
-      <div className="features-section-inner">
-        <div className="features-header-v2">
-          <span className="features-label-v2">Why union?</span>
+    <section className="features-section-refined">
+      <div className="features-section-refined-inner">
+        <div
+          ref={headerRef}
+          className={`features-header-refined reveal ${headerVisible ? 'visible' : ''}`}
+        >
+          <span className="section-label">Why union?</span>
+          <h2 className="section-title">選ばれる理由</h2>
         </div>
 
-        <div className="features-list-v2">
+        <div className="features-grid-refined">
           {features.map((feature, index) => (
             <div
               key={index}
               ref={feature.ref}
-              className={`feature-row-v2 ${index % 2 === 1 ? 'feature-row-v2--reverse' : ''} reveal ${feature.isVisible ? 'visible' : ''}`}
+              className={`feature-card-refined reveal stagger-${index + 1} ${feature.isVisible ? 'visible' : ''}`}
             >
-              <div className="feature-number-v2">{feature.number}</div>
-              <div className="feature-content-v2">
-                <h3 className="feature-title-v2">{feature.title}</h3>
-                <p className="feature-desc-v2">{feature.description}</p>
-              </div>
+              <span className="feature-card-number">{feature.number}</span>
+              <h3 className="feature-card-title">{feature.title}</h3>
+              <p className="feature-card-desc">{feature.description}</p>
             </div>
           ))}
         </div>

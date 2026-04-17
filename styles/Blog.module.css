@@ -93,7 +93,7 @@
 }
 
 .category {
-  background: rgba(0, 184, 212, 0.1);
+  background: rgba(var(--primary-color-rgb), 0.1);
   color: var(--primary-color);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
