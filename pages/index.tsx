@@ -1,12 +1,20 @@
+import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
 import FeaturesSection from '@/components/FeaturesSection';
+import PhilosophySection from '@/components/PhilosophySection';
+import JournalSection from '@/components/JournalSection';
 import CTASection from '@/components/CTASection';
+import { getAllBlogs, type Blog } from '@/lib/blog';
 
-export default function Home() {
+type Props = {
+  latestBlogs: Blog[];
+};
+
+export default function Home({ latestBlogs }: Props) {
   return (
     <>
       <Head>
@@ -26,9 +34,29 @@ export default function Home() {
         <HeroSection />
         <ServicesSection />
         <FeaturesSection />
+        <PhilosophySection />
+        <JournalSection blogs={latestBlogs} />
         <CTASection />
       </main>
       <Footer />
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  try {
+    const blogs = await getAllBlogs();
+    return {
+      props: {
+        latestBlogs: blogs.slice(0, 3),
+      },
+    };
+  } catch (error) {
+    console.error('Failed to fetch blogs for top page:', error);
+    return {
+      props: {
+        latestBlogs: [],
+      },
+    };
+  }
+};
