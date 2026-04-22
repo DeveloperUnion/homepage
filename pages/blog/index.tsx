@@ -2,6 +2,8 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import Header from '@/components/Header';
 import PageHero from '@/components/PageHero';
 import Footer from '@/components/Footer';
@@ -12,6 +14,8 @@ type Props = {
   blogs: Blog[];
 };
 
+const PAGE_SIZE = 10;
+
 function formatDate(iso: string) {
   const d = new Date(iso);
   const y = d.getFullYear();
@@ -20,7 +24,26 @@ function formatDate(iso: string) {
   return { full: `${y}.${m}.${day}`, year: String(y), month: m };
 }
 
+function archiveKeyOf(iso: string) {
+  const d = new Date(iso);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function buildHref(params: { category?: string | null; archive?: string | null; page?: number }) {
+  const qs = new URLSearchParams();
+  if (params.category) qs.set('category', params.category);
+  if (params.archive) qs.set('archive', params.archive);
+  if (params.page && params.page > 1) qs.set('page', String(params.page));
+  const s = qs.toString();
+  return s ? `/blog?${s}` : '/blog';
+}
+
 export default function BlogList({ blogs }: Props) {
+  const router = useRouter();
+  const activeCategory = typeof router.query.category === 'string' ? router.query.category : null;
+  const activeArchive = typeof router.query.archive === 'string' ? router.query.archive : null;
+  const pageParam = typeof router.query.page === 'string' ? parseInt(router.query.page, 10) : 1;
+
   const categories = blogs
     .filter((blog) => blog.category)
     .reduce((acc, blog) => {
@@ -33,7 +56,7 @@ export default function BlogList({ blogs }: Props) {
   const archives = blogs.reduce((acc, blog) => {
     const date = new Date(blog.publishedAt);
     const yearMonth = `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
-    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const key = archiveKeyOf(blog.publishedAt);
 
     if (!acc.find((a) => a.key === key)) {
       acc.push({ key, label: yearMonth, count: 1 });
@@ -43,8 +66,25 @@ export default function BlogList({ blogs }: Props) {
     return acc;
   }, [] as { key: string; label: string; count: number }[]);
 
-  const featured = blogs[0];
-  const rest = blogs.slice(1);
+  const filteredBlogs = useMemo(() => {
+    return blogs.filter((blog) => {
+      if (activeCategory && blog.category?.id !== activeCategory) return false;
+      if (activeArchive && archiveKeyOf(blog.publishedAt) !== activeArchive) return false;
+      return true;
+    });
+  }, [blogs, activeCategory, activeArchive]);
+
+  const isFiltering = Boolean(activeCategory || activeArchive);
+  const activeCategoryName = activeCategory
+    ? categories.find((c) => c.id === activeCategory)?.name ?? activeCategory
+    : null;
+  const activeArchiveLabel = activeArchive
+    ? archives.find((a) => a.key === activeArchive)?.label ?? activeArchive
+    : null;
+
+  const totalPages = Math.max(1, Math.ceil(filteredBlogs.length / PAGE_SIZE));
+  const currentPage = Math.min(Math.max(1, isNaN(pageParam) ? 1 : pageParam), totalPages);
+  const pagedBlogs = filteredBlogs.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
   return (
     <>
@@ -82,9 +122,20 @@ export default function BlogList({ blogs }: Props) {
                     <div className={styles.filterGroup}>
                       <span className={styles.filterLabel}>Category</span>
                       <ul className={styles.filterList}>
+                        <li>
+                          <Link
+                            href={buildHref({ archive: activeArchive })}
+                            className={`${styles.filterLink} ${!activeCategory ? styles.filterLinkActive : ''}`}
+                          >
+                            All
+                          </Link>
+                        </li>
                         {categories.map((c) => (
                           <li key={c.id}>
-                            <Link href={`/blog?category=${c.id}`} className={styles.filterLink}>
+                            <Link
+                              href={buildHref({ category: c.id, archive: activeArchive })}
+                              className={`${styles.filterLink} ${activeCategory === c.id ? styles.filterLinkActive : ''}`}
+                            >
                               {c.name}
                             </Link>
                           </li>
@@ -96,9 +147,20 @@ export default function BlogList({ blogs }: Props) {
                     <div className={styles.filterGroup}>
                       <span className={styles.filterLabel}>Archive</span>
                       <ul className={styles.filterList}>
+                        <li>
+                          <Link
+                            href={buildHref({ category: activeCategory })}
+                            className={`${styles.filterLink} ${!activeArchive ? styles.filterLinkActive : ''}`}
+                          >
+                            All
+                          </Link>
+                        </li>
                         {archives.map((a) => (
                           <li key={a.key}>
-                            <Link href={`/blog?archive=${a.key}`} className={styles.filterLink}>
+                            <Link
+                              href={buildHref({ category: activeCategory, archive: a.key })}
+                              className={`${styles.filterLink} ${activeArchive === a.key ? styles.filterLinkActive : ''}`}
+                            >
                               {a.label}
                               <span className={styles.filterCount}>{a.count}</span>
                             </Link>
@@ -110,90 +172,107 @@ export default function BlogList({ blogs }: Props) {
                 </nav>
               )}
 
-              {featured && (
-                <Link href={`/blog/${featured.id}`} className={styles.featured}>
-                  <div className={styles.featuredMedia}>
-                    {featured.eyecatch ? (
-                      <Image
-                        src={featured.eyecatch.url}
-                        alt={featured.title}
-                        fill
-                        sizes="(max-width: 900px) 100vw, 1200px"
-                        priority
-                        style={{ objectFit: 'cover' }}
-                      />
-                    ) : (
-                      <div className={styles.featuredMediaFallback} aria-hidden="true" />
-                    )}
-                    <span className={styles.featuredBadge}>Latest</span>
-                  </div>
-                  <div className={styles.featuredBody}>
-                    <div className={styles.featuredMeta}>
-                      {featured.category && (
-                        <span className={styles.category}>{featured.category.name}</span>
-                      )}
-                      <time className={styles.date}>
-                        {formatDate(featured.publishedAt).full}
-                      </time>
-                    </div>
-                    <h2 className={styles.featuredTitle}>{featured.title}</h2>
-                    <span className={styles.featuredArrow} aria-hidden="true">
-                      Read article
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
-                        <line x1="3" y1="12" x2="19" y2="12" />
-                        <path d="M14 6l6 6-6 6" />
-                      </svg>
-                    </span>
-                  </div>
-                </Link>
-              )}
-
-              {rest.length > 0 && (
-                <div className={styles.listHead}>
-                  <p className={styles.listLabel}>All entries</p>
-                  <p className={styles.listCount}>
-                    <span>{String(rest.length).padStart(2, '0')}</span>
-                    <span className={styles.listCountDiv}>/</span>
-                    <span>{String(blogs.length).padStart(2, '0')}</span>
+              {isFiltering && filteredBlogs.length === 0 && (
+                <div className={styles.empty}>
+                  <p>
+                    {activeCategoryName ? `「${activeCategoryName}」` : ''}
+                    {activeArchiveLabel ? `「${activeArchiveLabel}」` : ''}
+                    に該当する記事はありません。
+                  </p>
+                  <p className={styles.emptySub}>
+                    <Link href="/blog">すべての記事を表示</Link>
                   </p>
                 </div>
               )}
 
-              <ol className={styles.entries}>
-                {rest.map((blog, i) => {
-                  const idx = String(i + 2).padStart(2, '0');
-                  return (
-                    <li key={blog.id} className={styles.entry}>
-                      <Link href={`/blog/${blog.id}`} className={styles.entryLink}>
-                        <span className={styles.entryIndex} aria-hidden="true">{idx}</span>
-                        <div className={styles.entryBody}>
-                          <div className={styles.entryMeta}>
-                            <time className={styles.date}>
-                              {formatDate(blog.publishedAt).full}
-                            </time>
-                            {blog.category && (
-                              <span className={styles.category}>{blog.category.name}</span>
-                            )}
-                          </div>
-                          <h3 className={styles.entryTitle}>{blog.title}</h3>
+              {filteredBlogs.length > 0 && (
+                <div className={styles.listHead}>
+                  <p className={styles.listLabel}>All entries</p>
+                  {totalPages > 1 && (
+                    <p className={styles.listCount}>
+                      Page <span>{currentPage}</span>
+                      <span className={styles.listCountDiv}>/</span>
+                      <span>{totalPages}</span>
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <ul className={styles.entries}>
+                {pagedBlogs.map((blog) => (
+                  <li key={blog.id} className={styles.entry}>
+                    <Link href={`/blog/${blog.id}`} className={styles.entryLink}>
+                      {blog.eyecatch ? (
+                        <div className={styles.entryMedia}>
+                          <Image
+                            src={blog.eyecatch.url}
+                            alt={blog.title}
+                            fill
+                            sizes="(max-width: 900px) 40vw, 320px"
+                            style={{ objectFit: 'cover' }}
+                          />
                         </div>
-                        {blog.eyecatch && (
-                          <div className={styles.entryMedia}>
-                            <Image
-                              src={blog.eyecatch.url}
-                              alt={blog.title}
-                              fill
-                              sizes="(max-width: 900px) 40vw, 240px"
-                              style={{ objectFit: 'cover' }}
-                            />
-                          </div>
-                        )}
-                        <span className={styles.entryArrow} aria-hidden="true">→</span>
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ol>
+                      ) : (
+                        <div className={`${styles.entryMedia} ${styles.entryMediaFallback}`} aria-hidden="true" />
+                      )}
+                      <div className={styles.entryBody}>
+                        <div className={styles.entryMeta}>
+                          <time className={styles.date}>
+                            {formatDate(blog.publishedAt).full}
+                          </time>
+                          {blog.category && (
+                            <span className={styles.category}>{blog.category.name}</span>
+                          )}
+                        </div>
+                        <h3 className={styles.entryTitle}>{blog.title}</h3>
+                      </div>
+                      <span className={styles.entryArrow} aria-hidden="true">→</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {totalPages > 1 && (
+                <nav className={styles.pagination} aria-label="ページネーション">
+                  {currentPage > 1 ? (
+                    <Link
+                      href={buildHref({ category: activeCategory, archive: activeArchive, page: currentPage - 1 })}
+                      className={styles.pageNav}
+                      aria-label="前のページ"
+                    >
+                      ← Prev
+                    </Link>
+                  ) : (
+                    <span className={`${styles.pageNav} ${styles.pageNavDisabled}`} aria-hidden="true">← Prev</span>
+                  )}
+
+                  <ol className={styles.pageList}>
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
+                      <li key={p}>
+                        <Link
+                          href={buildHref({ category: activeCategory, archive: activeArchive, page: p })}
+                          className={`${styles.pageLink} ${p === currentPage ? styles.pageLinkActive : ''}`}
+                          aria-current={p === currentPage ? 'page' : undefined}
+                        >
+                          {String(p).padStart(2, '0')}
+                        </Link>
+                      </li>
+                    ))}
+                  </ol>
+
+                  {currentPage < totalPages ? (
+                    <Link
+                      href={buildHref({ category: activeCategory, archive: activeArchive, page: currentPage + 1 })}
+                      className={styles.pageNav}
+                      aria-label="次のページ"
+                    >
+                      Next →
+                    </Link>
+                  ) : (
+                    <span className={`${styles.pageNav} ${styles.pageNavDisabled}`} aria-hidden="true">Next →</span>
+                  )}
+                </nav>
+              )}
             </>
           )}
         </div>
