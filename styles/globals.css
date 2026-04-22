@@ -957,7 +957,7 @@ body {
   max-width: 1320px;             /* products__head と同じ幅で左端を揃える */
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 380px minmax(0, 1fr) 72px;
+  grid-template-columns: minmax(0, 1fr) 24px 600px 140px 72px;
   align-items: center;
   background: transparent;
   position: relative;
@@ -974,8 +974,8 @@ body {
 }
 
 .showcase__body {
-  order: 2;
-  padding: 40px 24px 40px 40px;  /* 画像との間に少しだけ間を取りつつテキストを右寄せ */
+  grid-column: 1;
+  padding: 48px 0 48px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1071,22 +1071,22 @@ body {
   color: var(--black);
 }
 
-/* 画像エリア — 左端に配置、画像全体が収まる */
+/* 画像エリア — 右側に配置、PNG の白背景がセクションに溶け込むよう余白を最小化 */
 .showcase__image {
-  order: 1;
+  grid-column: 3;
   position: relative;
-  width: 380px;
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  aspect-ratio: 3 / 2;
   background: transparent;
 }
 .showcase__image img {
-  object-fit: contain;
-  object-position: left center;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* 右端の矢印インジケーター */
 .showcase__arrow {
-  order: 3;
+  grid-column: 5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1095,20 +1095,12 @@ body {
   padding-right: 8px;
 }
 .showcase__arrow svg {
-  width: 40px;
-  height: 40px;
-}
-.showcase__arrow-line {
-  transition: stroke-dashoffset 600ms var(--ease-slow);
-  stroke-dasharray: 24;
-  stroke-dashoffset: 12;
+  width: 28px;
+  height: 28px;
 }
 .product-showcase:hover .showcase__arrow {
   color: var(--cyan);
   transform: translateX(8px);
-}
-.product-showcase:hover .showcase__arrow-line {
-  stroke-dashoffset: 0;
 }
 
 @media (max-width: 1100px) {
@@ -1116,16 +1108,16 @@ body {
     grid-template-columns: 1fr;
   }
   .showcase__body {
+    grid-column: 1;
     padding: 40px 24px 24px;
     gap: 12px;
-    order: 1;
   }
   .showcase__image {
+    grid-column: 1;
     width: 100%;
-    max-width: 380px;
+    max-width: 560px;
     justify-self: center;
     margin: 0 auto 24px;
-    order: 2;
   }
   .showcase__arrow {
     display: none;

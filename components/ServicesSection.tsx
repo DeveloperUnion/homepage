@@ -167,21 +167,13 @@ function ShowcaseCard({ sc }: { sc: (typeof showcases)[number] }) {
           src={sc.image}
           alt={sc.imageAlt}
           fill
-          sizes="(max-width: 1100px) 100vw, 380px"
+          sizes="(max-width: 1100px) 100vw, 600px"
         />
       </div>
 
       <div className="showcase__arrow" aria-hidden="true">
-        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeLinecap="round">
-          <line
-            className="showcase__arrow-line"
-            x1="4"
-            y1="20"
-            x2="28"
-            y2="20"
-            strokeWidth="1"
-          />
-          <path d="M22 12 L32 20 L22 28" strokeWidth="1.2" strokeLinejoin="round" />
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 5 L17 12 L9 19" strokeWidth="1.4" />
         </svg>
       </div>
     </Link>
