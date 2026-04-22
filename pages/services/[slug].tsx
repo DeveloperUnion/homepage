@@ -26,7 +26,7 @@ export default function ProductDetail({ product }: Props) {
         <meta property="og:type" content="website" />
       </Head>
 
-      <Header />
+      <Header solid />
 
       <section className="product-detail-hero">
         <div className="product-detail-hero__inner">

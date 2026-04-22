@@ -5,7 +5,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
-export default function Header() {
+type HeaderProps = {
+  solid?: boolean;
+};
+
+export default function Header({ solid = false }: HeaderProps) {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,7 +51,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className={`tech-header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`tech-header ${solid || isScrolled ? 'scrolled' : ''} ${solid ? 'solid' : ''}`}>
       <nav className="tech-nav">
         <Link href="/" className="tech-logo">
           <Image src="/images/logo.png" alt="union" width={160} height={52} className="tech-logo-img" priority />
