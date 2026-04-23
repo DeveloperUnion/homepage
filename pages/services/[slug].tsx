@@ -6,6 +6,9 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CTASection from '@/components/CTASection';
 import FeatureIcon from '@/components/FeatureIcon';
+import ProductOverviewSection from '@/components/ProductOverviewSection';
+import ProductFunctionSection from '@/components/ProductFunctionSection';
+import ProductWorkflowSection from '@/components/ProductWorkflowSection';
 import { products, getProductBySlug, Product } from '@/lib/products';
 
 type Props = {
@@ -86,6 +89,19 @@ export default function ProductDetail({ product }: Props) {
           </article>
         </div>
       </section>
+
+      {product.overview && <ProductOverviewSection overview={product.overview} />}
+
+      {product.functions?.map((fn, i) => (
+        <ProductFunctionSection
+          key={fn.label}
+          fn={fn}
+          align={i % 2 === 0 ? 'image-right' : 'image-left'}
+          tone={i % 2 === 0 ? 'white' : 'gray'}
+        />
+      ))}
+
+      {product.workflow && <ProductWorkflowSection workflow={product.workflow} />}
 
       <CTASection />
       <Footer />
