@@ -1,0 +1,6 @@
+# robots.txt for union / 株式会社main character
+# すべての検索エンジンに全ページのクロールを許可
+User-agent: *
+Allow: /
+
+Sitemap: https://kensetsu-tech.com/sitemap.xml

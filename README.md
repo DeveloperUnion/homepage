@@ -161,7 +161,7 @@ vercel
 **ブランド名**: union
 **代表者**: 北島壮馬
 **所在地**: 〒814-0001 福岡県福岡市早良区百道2-15-1
-**Email**: info@main-character.co.jp
+**Email**: info@kensetsu-tech.com
 **営業時間**: 平日 9:00-18:00
 
 ---

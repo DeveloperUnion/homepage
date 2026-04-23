@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -7,6 +6,7 @@ import { useMemo } from 'react';
 import Header from '@/components/Header';
 import PageHero from '@/components/PageHero';
 import Footer from '@/components/Footer';
+import PageSeo from '@/components/PageSeo';
 import { getAllBlogs, Blog } from '@/lib/blog';
 import styles from '@/styles/Blog.module.css';
 
@@ -88,17 +88,11 @@ export default function BlogList({ blogs }: Props) {
 
   return (
     <>
-      <Head>
-        <title>ブログ | union - 株式会社main character</title>
-        <meta
-          name="description"
-          content="現場の業務改善やプロダクトに関する情報を発信しています。"
-        />
-        <meta
-          name="keywords"
-          content="union,SaaS,現場,建設業,福祉,業務改善,プロダクト"
-        />
-      </Head>
+      <PageSeo
+        title="ブログ | union"
+        description="プロダクトの裏側、現場の気づき、DX の実践。unionチームが日々考えていることを、言葉にして残しています。"
+        path="/blog"
+      />
 
       <Header />
       <PageHero

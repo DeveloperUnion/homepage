@@ -15,7 +15,7 @@ const nextConfig = {
 
   // 環境変数
   env: {
-    SITE_URL: process.env.SITE_URL || 'https://main-character.co.jp',
+    SITE_URL: process.env.SITE_URL || 'https://kensetsu-tech.com',
     SITE_NAME: 'union | 株式会社main character',
   },
 

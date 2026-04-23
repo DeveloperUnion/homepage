@@ -1,20 +1,18 @@
-import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import PageHero from '@/components/PageHero';
 import ServicesSection from '@/components/ServicesSection';
 import CTASection from '@/components/CTASection';
+import PageSeo from '@/components/PageSeo';
 
 export default function Services() {
   return (
     <>
-      <Head>
-        <title>プロダクト | union</title>
-        <meta
-          name="description"
-          content="union が提供する現場特化型SaaSプロダクトの一覧。発注、介護記録、日報、勤怠管理など、現場の課題に寄り添ったツールを提供します。"
-        />
-      </Head>
+      <PageSeo
+        title="プロダクト | union"
+        description="union が提供する現場特化型SaaSプロダクトの一覧。発注、介護記録、日報、勤怠管理など、現場の課題に寄り添ったツールを提供します。"
+        path="/services"
+      />
 
       <Header />
       <PageHero

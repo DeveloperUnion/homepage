@@ -19,6 +19,7 @@ export default function Document() {
         />
 
         {/* Favicon */}
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
         {/* 構造化データ - 組織情報 */}
@@ -30,7 +31,7 @@ export default function Document() {
               '@type': 'Organization',
               name: '株式会社main character',
               alternateName: 'union',
-              url: 'https://main-character.co.jp',
+              url: 'https://kensetsu-tech.com',
               description: '建設・福祉など現場で働くプロフェッショナルのためのSaaSプロダクトシリーズを提供する企業',
               address: {
                 '@type': 'PostalAddress',

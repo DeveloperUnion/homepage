@@ -1,11 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CTASection from '@/components/CTASection';
 import FeatureIcon from '@/components/FeatureIcon';
+import PageSeo from '@/components/PageSeo';
 import ProductOverviewSection from '@/components/ProductOverviewSection';
 import ProductFunctionSection from '@/components/ProductFunctionSection';
 import ProductWorkflowSection from '@/components/ProductWorkflowSection';
@@ -20,14 +20,12 @@ export default function ProductDetail({ product }: Props) {
 
   return (
     <>
-      <Head>
-        <title>{`${fullName} | プロダクト - union`}</title>
-        <meta name="description" content={product.sub} />
-        <meta property="og:title" content={fullName} />
-        <meta property="og:description" content={product.sub} />
-        <meta property="og:image" content={product.image} />
-        <meta property="og:type" content="website" />
-      </Head>
+      <PageSeo
+        title={`${fullName} | プロダクト - union`}
+        description={product.sub}
+        path={`/services/${product.slug}`}
+        image={product.image}
+      />
 
       <Header solid />
 

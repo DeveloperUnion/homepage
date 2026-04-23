@@ -4,7 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageSeo from '@/components/PageSeo';
 import { getBlogById, getAllBlogIds, Blog } from '@/lib/blog';
+import { SITE_URL } from '@/lib/siteUrl';
 import styles from '@/styles/BlogDetail.module.css';
 
 type Props = {
@@ -18,18 +20,57 @@ function formatDate(iso: string) {
 
 export default function BlogDetail({ blog }: Props) {
   const description = (blog.html || blog.content)
-    .substring(0, 150)
-    .replace(/<[^>]*>/g, '');
+    .replace(/<[^>]*>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .substring(0, 150);
+
+  const canonical = `${SITE_URL}/blog/${blog.id}`;
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: blog.title,
+    description,
+    datePublished: new Date(blog.publishedAt).toISOString(),
+    dateModified: new Date(blog.updatedAt).toISOString(),
+    ...(blog.eyecatch ? { image: blog.eyecatch.url } : {}),
+    author: {
+      '@type': 'Organization',
+      name: '株式会社main character',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: '株式会社main character',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/favicon.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonical,
+    },
+  };
 
   return (
     <>
+      <PageSeo
+        title={`${blog.title} | ブログ - union`}
+        description={description}
+        path={`/blog/${blog.id}`}
+        image={blog.eyecatch?.url}
+        imageWidth={blog.eyecatch?.width}
+        imageHeight={blog.eyecatch?.height}
+        type="article"
+        publishedTime={new Date(blog.publishedAt).toISOString()}
+        modifiedTime={new Date(blog.updatedAt).toISOString()}
+      />
       <Head>
-        <title>{`${blog.title} | ブログ - union`}</title>
-        <meta name="description" content={description} />
-        <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={description} />
-        {blog.eyecatch && <meta property="og:image" content={blog.eyecatch.url} />}
-        <meta property="og:type" content="article" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </Head>
 
       <Header />
