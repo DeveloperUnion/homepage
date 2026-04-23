@@ -1437,80 +1437,51 @@ body {
   width: 100%;
 }
 .product-function__media--single {
-  aspect-ratio: 4 / 3;
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 1px 2px rgba(10, 10, 10, 0.04),
-    0 18px 48px rgba(10, 10, 10, 0.08);
+  aspect-ratio: 1488 / 1057;
 }
 .product-function__media--single img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
-/* portrait（スマホ画面を単体で斜めに見せる） */
+/* portrait（スマホ画面を単体で見せる） */
 .product-function__media--portrait {
   aspect-ratio: 4 / 3;
 }
 .product-function__portrait {
   position: absolute;
-  top: 4%;
+  top: 0;
   left: 50%;
-  height: 92%;
+  height: 100%;
   aspect-ratio: 924 / 1702;
-  transform: translateX(-50%) rotate(3deg);
-  transform-origin: center;
-  border-radius: 22px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 2px 6px rgba(10, 10, 10, 0.08),
-    0 28px 60px rgba(10, 10, 10, 0.22);
+  transform: translateX(-50%);
 }
 .product-function__portrait img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
-/* タブレット（後ろ）+ スマホ（前）の重ね配置 */
+/* タブレット（左上）+ スマホ（右下）を斜めの配置で重ねる。回転なし */
 .product-function__media--composite {
   aspect-ratio: 5 / 4;
 }
 .product-function__composite-back {
   position: absolute;
-  top: 6%;
+  top: 0;
   left: 0;
-  width: 78%;
+  width: 72%;
   aspect-ratio: 1488 / 1057;
-  transform: rotate(-4deg);
-  transform-origin: center;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 2px 6px rgba(10, 10, 10, 0.06),
-    0 24px 56px rgba(10, 10, 10, 0.12);
 }
 .product-function__composite-back img {
-  object-fit: cover;
+  object-fit: contain;
 }
 .product-function__composite-front {
   position: absolute;
-  top: 18%;
-  right: 2%;
-  width: 26%;
+  bottom: 0;
+  right: 4%;
+  width: 32%;
   aspect-ratio: 948 / 1659;
-  transform: rotate(5deg);
-  transform-origin: center;
-  border-radius: 22px;
-  overflow: hidden;
-  background: var(--white);
-  box-shadow:
-    0 2px 6px rgba(10, 10, 10, 0.08),
-    0 28px 60px rgba(10, 10, 10, 0.22);
 }
 .product-function__composite-front img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 @media (max-width: 1100px) {
@@ -1531,17 +1502,14 @@ body {
     aspect-ratio: 5 / 4;
   }
   .product-function__composite-back {
-    width: 74%;
+    width: 70%;
   }
   .product-function__composite-front {
-    width: 30%;
-    right: 4%;
+    width: 34%;
+    right: 2%;
   }
   .product-function__media--portrait {
     aspect-ratio: 4 / 3;
-  }
-  .product-function__portrait {
-    height: 88%;
   }
 }
 

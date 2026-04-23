@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 948 1659" role="img" aria-label="プレースホルダー: 顧客のスマホ発注画面">
+  <rect width="948" height="1659" fill="#f3f6f8"/>
+
+  <!-- phone card -->
+  <rect x="60" y="60" width="828" height="1539" rx="56" fill="#ffffff" stroke="#e0e0e0"/>
+
+  <!-- header -->
+  <rect x="140" y="140" width="220" height="24" rx="5" fill="#00b8d4"/>
+  <rect x="140" y="178" width="360" height="36" rx="6" fill="#0a0a0a" opacity="0.85"/>
+  <rect x="140" y="250" width="668" height="60" rx="16" fill="#fafbfc"/>
+  <rect x="168" y="276" width="260" height="12" rx="3" fill="#bdbdbd"/>
+  <rect x="720" y="270" width="80" height="24" rx="6" fill="#e6f6f9"/>
+  <rect x="736" y="278" width="48" height="8" rx="2" fill="#0097a7"/>
+
+  <!-- cart items -->
+  <g transform="translate(140 350)">
+    <rect x="0" y="0" width="668" height="140" rx="14" fill="#ffffff" stroke="#eceff1"/>
+    <rect x="24" y="24" width="92" height="92" rx="8" fill="#eceff1"/>
+    <rect x="140" y="28" width="320" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+    <rect x="140" y="56" width="200" height="12" rx="3" fill="#9e9e9e"/>
+    <rect x="140" y="84" width="120" height="28" rx="8" fill="#f5f7f8"/>
+    <rect x="156" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="200" y="94" width="12" height="8" rx="2" fill="#0a0a0a"/>
+    <rect x="236" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="540" y="56" width="108" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+  </g>
+
+  <g transform="translate(140 510)">
+    <rect x="0" y="0" width="668" height="140" rx="14" fill="#ffffff" stroke="#eceff1"/>
+    <rect x="24" y="24" width="92" height="92" rx="8" fill="#eceff1"/>
+    <rect x="140" y="28" width="280" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+    <rect x="140" y="56" width="180" height="12" rx="3" fill="#9e9e9e"/>
+    <rect x="140" y="84" width="120" height="28" rx="8" fill="#f5f7f8"/>
+    <rect x="156" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="200" y="94" width="12" height="8" rx="2" fill="#0a0a0a"/>
+    <rect x="236" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="540" y="56" width="108" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+  </g>
+
+  <g transform="translate(140 670)">
+    <rect x="0" y="0" width="668" height="140" rx="14" fill="#ffffff" stroke="#eceff1"/>
+    <rect x="24" y="24" width="92" height="92" rx="8" fill="#eceff1"/>
+    <rect x="140" y="28" width="240" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+    <rect x="140" y="56" width="220" height="12" rx="3" fill="#9e9e9e"/>
+    <rect x="140" y="84" width="120" height="28" rx="8" fill="#f5f7f8"/>
+    <rect x="156" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="200" y="94" width="12" height="8" rx="2" fill="#0a0a0a"/>
+    <rect x="236" y="94" width="20" height="8" rx="2" fill="#616161"/>
+    <rect x="540" y="56" width="108" height="16" rx="4" fill="#0a0a0a" opacity="0.85"/>
+  </g>
+
+  <!-- form -->
+  <g transform="translate(140 880)">
+    <rect x="0" y="0" width="160" height="14" rx="3" fill="#616161"/>
+    <rect x="0" y="28" width="668" height="64" rx="12" fill="#fafbfc" stroke="#eceff1"/>
+    <rect x="24" y="56" width="200" height="12" rx="3" fill="#bdbdbd"/>
+
+    <rect x="0" y="120" width="160" height="14" rx="3" fill="#616161"/>
+    <rect x="0" y="148" width="668" height="64" rx="12" fill="#fafbfc" stroke="#eceff1"/>
+    <rect x="24" y="176" width="240" height="12" rx="3" fill="#bdbdbd"/>
+  </g>
+
+  <!-- total -->
+  <g transform="translate(140 1140)">
+    <line x1="0" y1="0" x2="668" y2="0" stroke="#eceff1"/>
+    <rect x="0" y="30" width="140" height="14" rx="3" fill="#616161"/>
+    <rect x="500" y="24" width="168" height="26" rx="4" fill="#0a0a0a"/>
+  </g>
+
+  <!-- CTA -->
+  <g transform="translate(140 1260)">
+    <rect x="0" y="0" width="668" height="80" rx="18" fill="#00b8d4"/>
+    <rect x="260" y="32" width="148" height="14" rx="3" fill="#ffffff"/>
+    <path d="M430 39 l16 0 M440 33 l6 6 -6 6" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
